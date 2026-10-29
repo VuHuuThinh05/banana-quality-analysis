@@ -114,3 +114,7 @@ banana-quality-analysis/
 - Các kiểm thử mới kiểm tra tính hợp lệ của dữ liệu và kết quả hồi quy cơ bản, chưa bao phủ toàn bộ biểu đồ và thao tác file.
 
 Dự án ưu tiên tính dễ hiểu, tái lập và kiểm thử thay vì bổ sung mô hình phức tạp không cần thiết.
+
+## Architecture
+
+The pipeline structure, execution order and library responsibilities are documented in [System Architecture](docs/ARCHITECTURE.md).
