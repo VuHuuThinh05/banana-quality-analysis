@@ -1,5 +1,6 @@
 import pandas as pd
 import os
+from common import load_dataset
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import r2_score
@@ -29,7 +30,7 @@ os.makedirs(CSV_DIR, exist_ok=True)
 os.makedirs(PNG_DIR, exist_ok=True)
 
 # Đọc dữ liệu
-df = pd.read_csv(DATA_PATH)
+df = load_dataset()
 
 # =========================
 # 6.1 Chọn biến độc lập & phụ thuộc
@@ -72,7 +73,7 @@ print(coef_df)
 # 6.5 Đánh giá mô hình
 # =========================
 r2 = r2_score(y, y_pred)
-print("Hệ số R² (đa biến):", round(r2, 3))
+print("Hệ số R² trên dữ liệu huấn luyện (in-sample, không phải test R²):", round(r2, 3))
 
 # Lưu hệ số hồi quy (CSV)
 coef_df.to_csv(
