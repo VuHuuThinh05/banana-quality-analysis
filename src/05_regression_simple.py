@@ -74,3 +74,39 @@ plt.savefig(
     os.path.join(PNG_DIR, "hoi_quy_sugar_quality.png")
 )
 plt.show()
+# =========================
+# 5.6 HỒI QUY: RIPENESS vs QUALITY
+# =========================
+
+X2 = df[["ripeness_index"]]
+y2 = df["quality_score"]
+
+model2 = LinearRegression()
+model2.fit(X2, y2)
+
+y2_pred = model2.predict(X2)
+
+a2 = model2.coef_[0]
+b2 = model2.intercept_
+
+r2_2 = r2_score(y2, y2_pred)
+
+print("\n=== HỒI QUY RIPENESS → QUALITY ===")
+print(f"Phương trình: quality_score = {a2:.3f} * ripeness_index + {b2:.3f}")
+print(f"Hệ số R² = {r2_2:.3f}")
+
+plt.figure(figsize=(8,6))
+plt.scatter(X2, y2, alpha=0.5)
+plt.plot(X2, y2_pred, color="red")
+
+plt.xlabel("Ripeness Index")
+plt.ylabel("Quality Score")
+plt.title("Hồi quy tuyến tính giữa độ chín và chất lượng chuối")
+
+plt.tight_layout()
+
+plt.savefig(
+    os.path.join(PNG_DIR, "hoi_quy_ripeness_quality.png")
+)
+
+plt.show()

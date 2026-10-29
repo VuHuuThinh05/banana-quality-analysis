@@ -2,46 +2,31 @@ import pandas as pd
 import os
 import matplotlib.pyplot as plt
 import seaborn as sns
-
-# =========================
-# PHẦN 4: PHÂN TÍCH TƯƠNG QUAN
-# =========================
-
-# Lấy đường dẫn thư mục src
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
-# Đường dẫn dữ liệu
 DATA_PATH = os.path.join(
     BASE_DIR,
     "..",
     "data",
     "banana_quality_dataset.csv"
 )
-
-# =========================
-# THƯ MỤC OUTPUT
-# =========================
 CSV_DIR = os.path.join(BASE_DIR, "..", "output", "csv")
 PNG_DIR = os.path.join(BASE_DIR, "..", "output", "png")
 os.makedirs(CSV_DIR, exist_ok=True)
 os.makedirs(PNG_DIR, exist_ok=True)
-
-# Đọc dữ liệu
 df = pd.read_csv(DATA_PATH)
-
-# Các biến số cần phân tích
 numeric_cols = [
     "sugar_content_brix",
     "quality_score",
     "firmness_kgf",
     "weight_g",
-    "length_cm"
+    "length_cm",
+    "ripeness_index"
 ]
 
 # =========================
 # 4.1 Ma trận tương quan
 # =========================
-corr_matrix = df[numeric_cols].corr()
+corr_matrix = df[numeric_cols].corr() 
 
 print("\n=== MA TRẬN TƯƠNG QUAN ===")
 print(corr_matrix)
@@ -74,4 +59,12 @@ plt.show()
 r = df["sugar_content_brix"].corr(df["quality_score"])
 print(
     f"\nHệ số tương quan Pearson giữa độ ngọt và chất lượng: r = {r:.3f}"
+)
+# =========================
+# 4.4 Phân tích Ripeness – Quality
+# =========================
+r_ripeness = df["ripeness_index"].corr(df["quality_score"])
+
+print(
+    f"Hệ số tương quan Pearson giữa độ chín và chất lượng: r = {r_ripeness:.3f}"
 )
